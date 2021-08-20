@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,10 +113,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        // 退出
         buttonQuit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(MainActivity.this,"即将退出",Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -313,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
             textViewResult.setText(String.format("%.1f", param1));
         }
         else{
-            textViewResult.setText ("0");
+            textViewResult.setText ("");
         }
 
     }
