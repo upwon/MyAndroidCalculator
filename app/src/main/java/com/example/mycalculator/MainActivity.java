@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,10 +18,14 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView buttonUndo;
 
-    private StringBuilder currentInputNum=new StringBuilder();
-    private ArrayList <Integer> numsList=new ArrayList<Integer>();
-    private ArrayList<String> operatorList=new ArrayList<>();
-    private Boolean isNumStart=true;
+
+    private ArrayList<Button> buttonArrayList = new ArrayList<>(Arrays.asList(button0, button1, button2, button3,
+            button4, button5, button6, button7, button8, button9));
+
+    private StringBuilder currentInputNum = new StringBuilder();
+    private ArrayList<Integer> numsList = new ArrayList<Integer>();
+    private ArrayList<String> operatorList = new ArrayList<>();
+    private Boolean isNumStart = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +112,24 @@ public class MainActivity extends AppCompatActivity {
                 numberButtonClicked(view);
             }
         });
+
+        // 数字 1
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                numberButtonClicked(view);
+            }
+        });
+
+        for (Button it : buttonArrayList
+        ) {
+            it.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    numberButtonClicked(view);
+                }
+            });
+        }
 
 
     }
