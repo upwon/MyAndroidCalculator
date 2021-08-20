@@ -2,6 +2,7 @@ package com.example.mycalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.VoiceInteractor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -111,6 +112,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        buttonQuit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 //        // 数字 0
 //        button0.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -148,15 +157,15 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             //将view强制转化为 Button
-            Button btn=(Button)view;
+            Button btn = (Button) view;
 
             // 保存运算符
             operatorList.add(btn.getText().toString());
 
             // 改变标记 接下来输入的将是数字
-            isNumStart=true;
+            isNumStart = true;
 
-           currentInputNum.delete(0,currentInputNum.length());
+            currentInputNum.delete(0, currentInputNum.length());
             freshUI();
 
         }
@@ -197,43 +206,143 @@ public class MainActivity extends AppCompatActivity {
     // 撤销
     private void undoButtonClicked(View view) {
 
-       // 需要判断要撤销的是数字还是我们得运算符
-       if(numsList.size()>operatorList.size())
-       {
-           // 撤销数字
-           if(numsList.size()>0){
-               numsList.remove(numsList.size()-1);
-               isNumStart=true;
-               currentInputNum.delete(0,currentInputNum.length());
-           }
-       }
-       else{
-           // 撤销运算符
-           if(operatorList.size()>0){
-               operatorList.remove(operatorList.size()-1);
-               isNumStart=false;
-               if(numsList.size()>0){
-                   currentInputNum.append(numsList.get(currentInputNum.length()));  // bug 原为 .length()-1
-               }
-           }
-       }
+        // 需要判断要撤销的是数字还是我们得运算符
+        if (numsList.size() > operatorList.size()) {
+            // 撤销数字
+            if (numsList.size() > 0) {
+                numsList.remove(numsList.size() - 1);
+                isNumStart = true;
+                currentInputNum.delete(0, currentInputNum.length());
+            }
+        } else {
+            // 撤销运算符
+            if (operatorList.size() > 0) {
+                operatorList.remove(operatorList.size() - 1);
+                isNumStart = false;
+                if (numsList.size() > 0) {
+                    currentInputNum.append(numsList.get(currentInputNum.length()));  // bug 原为 .length()-1
+                }
+            }
+        }
 
-       freshUI();
-       calculate();
+        freshUI();
+        calculate();
     }
 
     // 清空
     private void clearAllButtonClicked(View view) {
         textViewInput.setText("");
         textViewResult.setText("");
-        currentInputNum.delete(0,currentInputNum.length());
+        currentInputNum.delete(0, currentInputNum.length());
         numsList.clear();
         operatorList.clear();
-        isNumStart=true;
+        isNumStart = true;
 
     }
 
     private void calculate() {
+        if (numsList.size() > 0) {
+            int i = 0;
+
+            // 记录第一个运算数
+            float param1 = numsList.get(0).floatValue();
+            float param2 = 0.0f;
+
+            if (operatorList.size() > 0) {
+
+                while (true) {
+
+                    // 获取i对应的运算符
+                    String operator = operatorList.get(i);
+
+                    // 判断是不是乘除运算
+                    if (operator.equals("x") || operator.equals("/")) {
+                        // 乘除直接运算
+                        // 找到第二个运算数
+                        if (i + 1 < numsList.size()) {
+                            param2 = numsList.get(i + 1);
+
+                            // 运算
+                            param1 = realCalculate(param1, operator, param2);
+                        }
+                    } else {
+                        //判断是不是最后一个 或者 后面不是乘除
+                        if (i == operatorList.size() - 1 ||
+                                (!operatorList.get(i + 1).equals("x") && !operatorList.get(i + 1).equals("/"))) {
+                            //可以直接运算
+                            if (i < numsList.size() - 1) {
+                                param2 = numsList.get(i + 1);
+                                param1 = realCalculate(param1, operator, param2);
+                            }
+                        } else {
+                            // 后面有更高优先级
+                            int j = i + 1;
+                            float mparam1 = numsList.get(j);
+                            float mparam2 = 0.0f;
+                            while (true) {
+                                // 获取运算符
+                                if (operatorList.get(j).equals("x") ||  operatorList.get(j).equals("/")) {
+                                    if (j < numsList.size() - 1) {
+                                        param2 = numsList.get(j + 1);
+
+                                        // 运算
+                                        param1 = realCalculate(param1, operator, param2);
+                                    }
+                                } else {
+                                    break;
+                                }
+                                j++;
+                                if (j == operatorList.size()) {
+                                    break;
+                                }
+                            }
+                            param2 = mparam1;
+                            param1 = realCalculate(param1, operator, param2);
+                            i = j - 1;
+                        }
+
+                    }
+                    i++;
+                    if (i == operatorList.size()) {
+                        break;
+                    }
+                }
+            }
+
+            // 显示结果
+            textViewResult.setText(String.format("%.1f", param1));
+        }
+        else{
+            textViewResult.setText ("0");
+        }
+
+    }
+
+    private float realCalculate(float param1, String operator, float param2) {
+
+        float result = 0.0f;
+
+        switch (operator) {
+            case "+":
+                result = param1 + param2;
+                break;
+
+            case "-":
+                result = param1 - param2;
+                break;
+            case "x":
+                result = param1 * param2;
+                break;
+            case "/":
+                result = param1 / param2;
+                break;
+
+            default:
+                break;
+
+
+        }
+        return result;
     }
 
     private void freshUI() {
@@ -252,7 +361,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         textViewInput.setText(str.toString());
-
 
 
     }
