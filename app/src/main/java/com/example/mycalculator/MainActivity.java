@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                operatorList.remove(operatorList.size()-1);
                isNumStart=false;
                if(numsList.size()>0){
-                   currentInputNum.append(numsList.get(currentInputNum.length()-1));  // bug 原为 .length()-1
+                   currentInputNum.append(numsList.get(currentInputNum.length()));  // bug 原为 .length()-1
                }
            }
        }
