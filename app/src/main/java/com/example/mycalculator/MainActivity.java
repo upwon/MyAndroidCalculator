@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
             buttonAdd, buttonSub, buttonMul, buttonDivision, buttonMod, buttonEqual, buttonQuit;
 
     ImageView buttonUndo;
+    TextView textViewInput, textViewResult;
 
-
-    private ArrayList<Button> buttonArrayList = new ArrayList<>( );
+    private ArrayList<Button> buttonArrayList = new ArrayList<>();
 
     private StringBuilder currentInputNum = new StringBuilder();
     private ArrayList<Integer> numsList = new ArrayList<Integer>();
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 控件绑定
-
+        textViewInput = findViewById(R.id.textView_input);
+        textViewResult = findViewById(R.id.textView_result);
 
         button0 = (Button) findViewById(R.id.button_0);
         button1 = (Button) findViewById(R.id.button_1);
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         buttonUndo = (ImageView) findViewById(R.id.imageView_Undo);  // 撤销输入
 
 
-        buttonArrayList.addAll (Arrays.asList(button0, button1, button2, button3,
+        buttonArrayList.addAll(Arrays.asList(button0, button1, button2, button3,
                 button4, button5, button6, button7, button8, button9));
 
 
@@ -170,8 +172,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
+        freshUI();
+        calculate();
     }
+
 
     // 撤销
     private void undoButtonClicked(View view) {
@@ -181,5 +185,27 @@ public class MainActivity extends AppCompatActivity {
     private void clearAllButtonClicked(View view) {
     }
 
+    private void calculate() {
+    }
 
+    private void freshUI() {
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < numsList.size(); i++) {
+            //
+            str.append(numsList.get(i));
+
+            // 判断运算符数组中对应位置是否有内容
+            if (operatorList.size() > i) {
+                // 将第i 对应的运算符拼接到字符串中
+                str.append(" " + operatorList.get(i) + " ");
+            }
+
+        }
+
+        textViewInput.setText(str.toString());
+
+
+
+    }
 }
