@@ -143,6 +143,23 @@ public class MainActivity extends AppCompatActivity {
 
     // 运算符 + - * / % 操作
     private void operatorButtonClicked(View view) {
+        if (view == null) {
+            throw new NullPointerException("null cannot be cast to non-null type android.widget.TextView");
+        } else {
+
+            //将view强制转化为 Button
+            Button btn=(Button)view;
+
+            // 保存运算符
+            operatorList.add(btn.getText().toString());
+
+            // 改变标记 接下来输入的将是数字
+            isNumStart=true;
+
+           currentInputNum.delete(0,currentInputNum.length());
+            freshUI();
+
+        }
 
     }
 
@@ -179,10 +196,18 @@ public class MainActivity extends AppCompatActivity {
 
     // 撤销
     private void undoButtonClicked(View view) {
+        
     }
 
     // 清空
     private void clearAllButtonClicked(View view) {
+        textViewInput.setText("");
+        textViewResult.setText("");
+        currentInputNum.delete(0,currentInputNum.length());
+        numsList.clear();
+        operatorList.clear();
+        isNumStart=true;
+
     }
 
     private void calculate() {
@@ -208,4 +233,5 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 }
