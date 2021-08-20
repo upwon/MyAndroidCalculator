@@ -3,7 +3,7 @@
 
 
 
-</ br>
+<br />
 
 ### 演示
 
@@ -11,7 +11,7 @@
 
 ![演示4](https://tva4.sinaimg.cn/large/003pPIslgy1gtnjpg1k4vg61hc0sa7mf02.gif)
 
-
+<br />
 
 ### 安装教程
 
@@ -23,7 +23,7 @@
 
 3. 编译运行
 
-
+<br />
 
 ### 部分过程记录
 
