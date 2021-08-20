@@ -3,8 +3,11 @@ package com.example.mycalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,8 +15,12 @@ public class MainActivity extends AppCompatActivity {
             button7, button8, button9, buttonDot, buttonAC,
             buttonAdd, buttonSub, buttonMul, buttonDivision, buttonMod, buttonEqual, buttonQuit;
 
-    ImageView imgViewUndo;
+    ImageView buttonUndo;
 
+    private StringBuilder currentInputNum=new StringBuilder();
+    private ArrayList <Integer> numsList=new ArrayList<Integer>();
+    private ArrayList<String> operatorList=new ArrayList<>();
+    private Boolean isNumStart=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +50,78 @@ public class MainActivity extends AppCompatActivity {
         buttonMod = (Button) findViewById(R.id.button_mod);
         buttonEqual = (Button) findViewById(R.id.button_equal);
         buttonQuit = (Button) findViewById(R.id.button_close);     // 退出应用
-        imgViewUndo = (ImageView) findViewById(R.id.imageView_Undo);  // 撤销输入
+        buttonUndo = (ImageView) findViewById(R.id.imageView_Undo);  // 撤销输入
+
+        // 清空
+        buttonAC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearAllButtonClicked(view);
+            }
+        });
+
+        // 撤销输入
+        buttonUndo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                undoButtonClicked(view);
+            }
+        });
+
+        // 乘法
+        buttonMul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                operatorButtonClicked(view);
+            }
+        });
+
+        // 除法
+        buttonDivision.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                operatorButtonClicked(view);
+            }
+        });
+
+        // 加法
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                operatorButtonClicked(view);
+            }
+        });
+
+        // 减法
+        buttonSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                operatorButtonClicked(view);
+            }
+        });
+
+        // 数字 0
+        button0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                numberButtonClicked(view);
+            }
+        });
 
 
-        
+    }
+
+    private void operatorButtonClicked(View view) {
+    }
+
+    private void undoButtonClicked(View view) {
+    }
+
+    private void clearAllButtonClicked(View view) {
+    }
+
+    // 数字按键
+    private void numberButtonClicked(View view) {
 
     }
 }
