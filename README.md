@@ -1,10 +1,7 @@
 # [MyAndroidCalculator](https://github.com/upwon/MyAndroidCalculator)
  简易 Android 计算器的实现 ，暗黑风格，实现简单的加减乘除，实时显示运算结果，可撤销操作。
 
-
-
-<br />
-<br />
+<br/>
 
 ### 演示
 
