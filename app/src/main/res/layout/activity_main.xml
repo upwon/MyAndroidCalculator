@@ -38,7 +38,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView_input"
@@ -145,14 +145,15 @@
 
         android:background="@drawable/keyboard_round_shape"
         android:gravity="center"
-        android:text="0"
+        android:text="@string/buttonName0"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/button_dot"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView_close"
-        app:layout_constraintTop_toTopOf="@+id/imageView_close" />
+        app:layout_constraintStart_toEndOf="@+id/button_close"
+        app:layout_constraintTop_toTopOf="@+id/button_close"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button_dot"
@@ -213,7 +214,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_close"
+        app:layout_constraintBottom_toTopOf="@+id/button_close"
         app:layout_constraintEnd_toStartOf="@+id/button_2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -383,17 +384,17 @@
         app:layout_constraintStart_toEndOf="@+id/button_dot"
         app:layout_constraintTop_toTopOf="@+id/button_dot" />
 
-    <ImageView
-        android:id="@+id/imageView_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/button_close"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/keyboard_round_shape"
-        android:scaleType="centerInside"
+        android:text="退出"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/button_0"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_1"
         app:srcCompat="@drawable/ic_baseline_settings_backup_restore_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

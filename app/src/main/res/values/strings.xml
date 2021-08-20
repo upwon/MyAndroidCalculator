@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">第一周计算器</string>
+    <string name="buttonName0">0</string>
 </resources>
