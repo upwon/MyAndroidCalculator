@@ -285,10 +285,10 @@ public class MainActivity extends AppCompatActivity {
                                 // 获取运算符
                                 if (operatorList.get(j).equals("x") ||  operatorList.get(j).equals("/")) {
                                     if (j < numsList.size() - 1) {
-                                        param2 = numsList.get(j + 1);
+                                        mparam2 = numsList.get(j + 1);
 
                                         // 运算
-                                        param1 = realCalculate(param1, operator, param2);
+                                        mparam1 = realCalculate(mparam1, operatorList.get(j), mparam2);
                                     }
                                 } else {
                                     break;
