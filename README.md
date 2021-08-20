@@ -196,7 +196,7 @@ android:layout_marginEnd="20dp"
 
 
 
-然后分别将所有按钮 连接或者chain
+然后分别将所有按钮 连接并做相应的顶部对齐或着左对齐
 
 
 
