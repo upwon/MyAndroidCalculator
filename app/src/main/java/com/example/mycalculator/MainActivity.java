@@ -196,7 +196,30 @@ public class MainActivity extends AppCompatActivity {
 
     // 撤销
     private void undoButtonClicked(View view) {
-        
+
+       // 需要判断要撤销的是数字还是我们得运算符
+       if(numsList.size()>operatorList.size())
+       {
+           // 撤销数字
+           if(numsList.size()>0){
+               numsList.remove(numsList.size()-1);
+               isNumStart=true;
+               currentInputNum.delete(0,currentInputNum.length());
+           }
+       }
+       else{
+           // 撤销运算符
+           if(operatorList.size()>0){
+               operatorList.remove(operatorList.size()-1);
+               isNumStart=false;
+               if(numsList.size()>0){
+                   currentInputNum.append(numsList.get(currentInputNum.length()-1));
+               }
+           }
+       }
+
+       freshUI();
+       calculate();
     }
 
     // 清空
